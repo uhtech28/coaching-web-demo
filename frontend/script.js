@@ -1,5 +1,5 @@
 const form = document.getElementById("contactForm");
-const API_URL = "https://uh-tech-backend.onrender.com/api/enquiry";
+const API_URL = "https://uh-tech-backend.onrender.com";
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
