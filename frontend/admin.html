@@ -1,0 +1,20 @@
+<body>
+
+  <h1>Admin Panel</h1>
+  <p id="status">Loading enquiries...</p>
+
+  <script>
+    fetch("https://uh-tech-backend.onrender.com/api/admin/enquiries")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("status").innerText =
+          "Enquiries loaded from server";
+      })
+      .catch(error => {
+        document.getElementById("status").innerText =
+          "Failed to load enquiries";
+        console.error(error);
+      });
+  </script>
+
+</body>

@@ -1,0 +1,155 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #2c2c54;
+  color: white;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(#0a3d62, #3c6382);
+  color: white;
+}
+
+.hero h1 {
+  font-size: 36px;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #fbc531;
+  color: black;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.courses .course-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #f1f2f6;
+  padding: 20px;
+  width: 250px;
+  border-radius: 8px;
+}
+
+.why-us ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.why-us li {
+  margin: 10px 0;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonial-box {
+  background: #f1f2f6;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+/* ===== CONTACT ===== */
+.contact form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.contact input,
+.contact select,
+.contact textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.contact button {
+  padding: 12px;
+  background: #0a3d62;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #0a3d62;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #0a3d62;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+    text-align: center;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
