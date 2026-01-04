@@ -1,20 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 10px; }
+    th { background: #f4f4f4; }
+  </style>
+</head>
 <body>
 
-  <h1>Admin Panel</h1>
-  <p id="status">Loading enquiries...</p>
+<h2>Admin Panel – Enquiries</h2>
 
-  <script>
-    fetch("https://uh-tech-backend.onrender.com/api/admin/enquiries")
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("status").innerText =
-          "Enquiries loaded from server";
-      })
-      .catch(error => {
-        document.getElementById("status").innerText =
-          "Failed to load enquiries";
-        console.error(error);
-      });
-  </script>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Course</th>
+      <th>Message</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody id="enquiryTable"></tbody>
+</table>
+
+<script>
+const ADMIN_API = "https://uh-tech-backend.onrender.com/api/admin/enquiries";
+
+
+fetch(ADMIN_API)
+  .then(res => res.json())
+  .then(data => {
+    const table = document.getElementById("enquiryTable");
+
+    if (data.length === 0) {
+      table.innerHTML = "<tr><td colspan='5'>No enquiries</td></tr>";
+      return;
+    }
+
+    data.forEach(e => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${e.name}</td>
+        <td>${e.phone}</td>
+        <td>${e.course}</td>
+        <td>${e.message}</td>
+        <td>${new Date(e.createdAt).toLocaleString()}</td>
+      `;
+      table.appendChild(row);
+    });
+  })
+  .catch(err => {
+    alert("Admin API error");
+    console.error(err);
+  });
+</script>
 
 </body>
+</html>

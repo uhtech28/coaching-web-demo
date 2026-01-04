@@ -11,50 +11,41 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// TEST ROUTE
+app.get("/test", (req, res) => {
+  res.send("Backend working fine ✅");
+});
+
 // MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("✅ MongoDB Connected");
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err.message);
-  });
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Error:", err.message));
 
-// Enquiry API
+// FORM SUBMIT API
 app.post("/api/enquiry", async (req, res) => {
   try {
-    console.log("📩 Incoming data:", req.body);
+    const enquiry = new Enquiry(req.body);
+    await enquiry.save();
+    res.status(201).json({ message: "Enquiry saved successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to save enquiry" });
+  }
+});
 
-    const enquiry = new Enquiry({
-      name: req.body.name,
-      phone: req.body.phone,
-      course: req.body.course,
-      message: req.body.message
-    });
-// ADMIN: get all enquiries
+// ADMIN API
 app.get("/api/admin/enquiries", async (req, res) => {
   try {
-    const enquiries = await Enquiry.find();
+    const enquiries = await Enquiry.find().sort({ createdAt: -1 });
     res.json(enquiries);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch enquiries" });
   }
 });
 
-    await enquiry.save();
-    res.status(201).json({ message: "Enquiry saved successfully" });
-  } catch (error) {
-    console.error("❌ Save error:", error);
-    res.status(500).json({ message: error.message });
-  }
-  
-});
-
-// Start server
-const PORT = 5000;
+// START SERVER
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
-const mongoose = require("mongoose");
 

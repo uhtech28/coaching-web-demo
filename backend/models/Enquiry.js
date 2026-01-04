@@ -1,27 +1,30 @@
 const mongoose = require("mongoose");
 
-// This schema defines what an enquiry looks like
-const enquirySchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
+const enquirySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    phone: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    course: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    message: {
+      type: String,
+      trim: true
+    }
   },
-  phone: {
-    type: String,
-    required: true
-  },
-  course: {
-    type: String,
-    required: true
-  },
-  message: {
-    type: String
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  {
+    timestamps: true
   }
-});
+);
 
-// Export model so server.js can use it
 module.exports = mongoose.model("Enquiry", enquirySchema);
